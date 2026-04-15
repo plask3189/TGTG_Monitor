@@ -6,6 +6,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from prettytable import PrettyTable
 import yaml
+import subprocess
 
 def get_status_of_favorites(headers):
     print(f"Requested data at {datetime.now()}")
@@ -62,13 +63,14 @@ def check_availability(data):
     if available:
         print()
         for f in available:
-            print(f"  ⚡ Reserve {f['display_name']} soon! ({f['items_available']} left)")
-
+            print(f"  ⚡ Reserve {f['display_name']} soon! ({f['items_available']} left)")          
+            msg = f"⚡ {f['display_name']} — {f['items_available']} left!"
+            subprocess.run(["osascript", "-e", f'display notification "{msg}" with title "Too Good To Go" sound name "Default"'])   
 if __name__ == "__main__":
     with open("headers.yaml") as f:
         headers= yaml.safe_load(f)
     while True:
         data = get_status_of_favorites(headers)
         check_availability(data )
-        time.sleep(180)  # seconds
+        time.sleep(120)  # seconds
     
