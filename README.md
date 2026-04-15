@@ -10,7 +10,7 @@ To set up mac as a proxy between tgtg servers and the app:
 https://den.dev/blog/intercepting-iphone-traffic-mac-for-free/
 
 Identify the POST command like this:
-![Post](post.png)
+![Post](post2.png)
 which contains keys authorization, x-correlation-id, and cookie values. Use these in the headers.yaml file. 
 
 ## Run:
