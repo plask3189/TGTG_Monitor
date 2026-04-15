@@ -9,9 +9,11 @@ It monitors the availability of your favorited bags.
 To set up mac as a proxy between tgtg servers and the app:
 https://den.dev/blog/intercepting-iphone-traffic-mac-for-free/
 
-Identify the POST command like this:
-![Post](post2.png)
-which contains keys authorization, x-correlation-id, and cookie values. Use these in the headers.yaml file. 
+Identify the POST command which looks like this:
+![Post](post3.png)
+
+The request contains keys authorization, x-correlation-id, and cookie values. Use these in the headers.yaml file. 
+The response contains the item info and inventory.
 
 ## Run:
 ```bash

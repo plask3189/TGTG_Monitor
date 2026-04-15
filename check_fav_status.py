@@ -54,7 +54,7 @@ def check_availability(data):
         else:
             sold_out_str = "N/A"
 
-        flag = "✅" if available_quantity > 0 else ""
+        flag = "**" if available_quantity > 0 else ""
         table.add_row([f"{flag} {name}", available_quantity, sold_out_str])
 
     print(table)
