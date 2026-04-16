@@ -30,8 +30,8 @@ def get_status_of_favorites(headers):
         response.raise_for_status()
     except requests.HTTPError:
         print(
-            "Request failed. If you got a 401, the JWT token likely expired and you need a fresh one.\n"
-            "The DataDome cookie may also have expired or been invalidated."
+            "Request failed. JWT token likely expired \n"
+            " DataDome cookie check"
         )
         return None
     data = response.json()
@@ -61,16 +61,18 @@ def check_availability(data):
     print("\n")
     available = [f for f in data["favourite_items"] if f["items_available"] > 0]
     if available:
-        print()
         for f in available:
-            print(f"  ⚡ Reserve {f['display_name']} soon! ({f['items_available']} left)")          
-            msg = f"⚡ {f['display_name']} — {f['items_available']} left!"
-            subprocess.run(["osascript", "-e", f'display notification "{msg}" with title "Too Good To Go" sound name "Default"'])   
+            print(f" *** Reserve {f['display_name']} soon! ({f['items_available']} left)")          
+            msg = f" *** {f['display_name']} — {f['items_available']} left!"
+            subprocess.run(["osascript", "-e", f'display notification "{msg}" with title "Too Good To Go" sound name "Default"'])
+            to_say = f'TGTG {f["display_name"]}'
+            subprocess.run(["say", to_say]) # siri says out loud tgtg
+
 if __name__ == "__main__":
     with open("headers.yaml") as f:
         headers= yaml.safe_load(f)
     while True:
         data = get_status_of_favorites(headers)
         check_availability(data )
-        time.sleep(120)  # seconds
+        time.sleep(30)  # seconds
     

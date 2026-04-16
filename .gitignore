@@ -1,3 +1,4 @@
 *.sh
 headers.yaml
 fav_response.json
+*.DS_Store
