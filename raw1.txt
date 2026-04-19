@@ -1,0 +1,17 @@
+GET /pep/gcc HTTP/1.1
+Host: gspe1-ssl.ls.apple.com
+Accept: */*
+Accept-Language: en-US,en;q=0.9
+Connection: keep-alive
+Accept-Encoding: gzip, deflate, br
+User-Agent: geod/1 CFNetwork/3860.500.112 Darwin/25.4.0
+
+
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 2
+Date: Sun, 19 Apr 2026 16:16:08 GMT
+Connection: keep-alive
+
+US

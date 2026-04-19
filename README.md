@@ -6,14 +6,36 @@ This automates the purchasing of a tgtg bag.
 It monitors the availability of your favorited bags.
 
 ## Setup:
-To set up mac as a proxy between tgtg servers and the app:
-https://den.dev/blog/intercepting-iphone-traffic-mac-for-free/
+To set up mac as a proxy between tgtg servers and the iphone app:
+
+### Set up the toolchain mitmproxy
+
+```bash
+docker pull mitmproxy/mitmproxy
+docker images
+```
+
+### Running mitmproxy
+```bash
+docker run --rm -it -v ~/.mitmproxy:/home/mitmproxy/.mitmproxy -p 8080:8080 mitmproxy/mitmproxy
+```
+
+### Capturing HTTP/S traffic
+Get the IP address
+```bash
+ipconfig getifaddr en0
+```
+
+### Now in iPhone
+Now you can set this up as a proxy on iPhone. Go to Settings > Wi-Fi > Currently Connected Network > Configure Proxy > Manual and enter the server IP and port (8080). Click save. While mitmproxy is running in terminal, go to mitm.it in Safari on iPhone and download the profile for iOS. 
+
+Then go to the TGTG app.
 
 Identify the POST command which looks like this:
 
 ![Post](post3.png)
 
-The request contains keys authorization, x-correlation-id, and cookie values. Use these in the headers.yaml file. 
+The request contains keys `authorization`, `x-correlation-id`, and `cookie` values. Use these in the headers.yaml file. 
 
 The response contains the item info and inventory.
 
@@ -43,3 +65,7 @@ Status: 200
 |  Whole Foods - OH - Kenwood (Bakery Bag)                   |       0       | 2026-04-14 09:16:35 PM EDT |
 +------------------------------------------------------------+---------------+----------------------------+
 ```
+
+
+### References 
+https://den.dev/blog/intercepting-iphone-traffic-mac-for-free/
